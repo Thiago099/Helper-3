@@ -26,18 +26,19 @@
     </form>
     <?php
     $path=[
-      'Gerar modelo e controlador'    => 'functionalities/gerar_modelo_e_controlador.php',
-      'Adicionar campos de controle'  => 'functionalities/adicionar_campos_de_controle.php',
-      'Código insert'                 => 'functionalities/codigo_insert.php',
-      'Código controlador'            => 'functionalities/codigo_controlador.php',
-      'Código select'                 => 'functionalities/codigo_select.php',
-      'Código JSON'                   => 'functionalities/codigo_json.php',
-      'Caminhos do controlador'       => 'functionalities/caminhos_do_controlador.php',
+      'Gerar modelo e controlador'    => 'gerar_modelo_e_controlador.php',
+      'Adicionar campos de controle'  => 'adicionar_campos_de_controle.php',
+      'Código insert'                 => 'codigo_insert.php',
+      'Código controlador'            => 'codigo_controlador.php',
+      'Código select'                 => 'codigo_select.php',
+      'Código JSON'                   => 'codigo_json.php',
+      'Caminhos do controlador'       => 'caminhos_do_controlador.php',
     ];
     if(isset($_GET['action']))
     {
-      include $path[$_GET['action']];
+      include 'functionalities/'.$path[$_GET['action']];
     }
+    // include 'functionalities/codigo_json.php';
     ?>
   </body>
   </div>
