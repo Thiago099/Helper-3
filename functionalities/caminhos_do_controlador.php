@@ -36,8 +36,7 @@
       $cur=implode(array_slice($target,$start,$i-$start));
       if(strtolower($cur)==$_GET['table'])
       {
-        echo "public/$cur/\n\n";
-        echo ident('Caminho',50).'Privilego'."\n\n";
+        echo ident('Caminho',80).'Privilego'."\n\n";
         $i+=2;
         for (; $i < $target_lenght; $i++)
         {
@@ -49,7 +48,7 @@
             {
               $i++;
             }
-            echo ident(strtolower(implode(array_slice($target,$start,$i-$start))),50);
+            echo ident("public/$cur/".implode(array_slice($target,$start,$i-$start)),80);
             $i++;
             for (; $i < $target_lenght; $i++)
             {
