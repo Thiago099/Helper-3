@@ -6,7 +6,7 @@ $table=$_GET['table'];
 $db=new sql('information_schema');
 $fields = $db->query("SELECT COLUMN_NAME,IS_NULLABLE,COLUMN_TYPE,EXTRA FROM COLUMNS WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table'");
 $primary = $db->query("SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table' AND COLUMN_KEY='PRI'");
-$fks = $db->query("SELECT k.CONSTRAINT_NAME `constraint`, COLUMN_NAME `column`,k.REFERENCED_TABLE_NAME `table`, k.REFERENCED_COLUMN_NAME `key`
+$fks = $db->query("SELECT k.CONSTRAINT_NAME `constraint`, k.CONSTRAINT_SCHEMA `schema`, COLUMN_NAME `column`,k.REFERENCED_TABLE_NAME `table`, k.REFERENCED_COLUMN_NAME `key`
     FROM information_schema.TABLE_CONSTRAINTS i
     LEFT JOIN information_schema.KEY_COLUMN_USAGE k ON i.CONSTRAINT_NAME = k.CONSTRAINT_NAME
     WHERE i.CONSTRAINT_TYPE = 'FOREIGN KEY'
@@ -37,7 +37,7 @@ foreach ($fks as $i)
 }
 foreach ($fks as $i)
 {
-  $ret.="          CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$database`.`$i[table]` (`$i[key]`) ON UPDATE NO ACTION ON DELETE NO ACTION,\n";
+  $ret.="          CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$i[schema]`.`$i[table]` (`$i[key]`) ON UPDATE NO ACTION ON DELETE NO ACTION,\n";
 }
 $ret=substr($ret, 0, -2);
 $ret.="
