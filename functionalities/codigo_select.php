@@ -22,12 +22,12 @@
         foreach ($fields as $j) {
           $jj=$j['Field'];
           if($i['chave']==$jj)continue;
-          $select.=ident("$fk_name.$jj",70)." AS {$jj}_$fk_name,\n";
+          $select.=ident("`$fk_name`.`$jj`",70)." AS `{$jj}_$fk_name`,\n";
         }
 
-        $join.="LEFT JOIN $ct";
-        if($ct != $fk_name)$join.=" AS $fk_name";
-        $join.=" ON $table.$i[coluna] = $fk_name.$i[chave]\n";
+        $join.="LEFT JOIN `$ct`";
+        if($ct != $fk_name)$join.=" AS `$fk_name`";
+        $join.=" ON `$table`.`$i[coluna]` = `$fk_name`.`$i[chave]`\n";
     }
 
     // foreach ($fks as $i) {
@@ -40,5 +40,5 @@
   loop($_GET['database'],$_GET['table'],$join,$select);
   if($select==",\n")$select='';
   $select=substr($select, 0, -2)."\n";
-  echo "SELECT\n$_GET[table].*{$select}FROM $_GET[table]\n$join";
+  echo "SELECT\n`$_GET[table]`.*{$select}FROM `$_GET[table]`\n$join";
 ?></textarea>

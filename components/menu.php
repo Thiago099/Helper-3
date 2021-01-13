@@ -14,6 +14,7 @@ if(isset($_GET['table'])&& exists($_GET['database'],$_GET['table'])):
     <input type="submit" name="action" value="Código select">
     <input type="submit" name="action" value="Código JSON">
     <input type="submit" name="action" value="Caminhos do controlador">
+    <input type="submit" name="action" value="Codigo doctrine">
     </div>
   </div>
 <div class="container">

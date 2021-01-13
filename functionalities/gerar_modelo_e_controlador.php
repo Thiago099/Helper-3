@@ -169,7 +169,7 @@ class $model extends CI_Model
     }
     public function get(\$id = null)
     {
-      if(\$id != null)\$id = \"AND $table.id = \$id\";
+      if(\$id != null)\$id = \"AND `$table`.`id` = \$id\";
       \$query = \$this->db->query(\"";
         function loop($database,$table,&$join,&$select)
         {
@@ -193,12 +193,12 @@ class $model extends CI_Model
               foreach ($fields as $j) {
                 $jj=$j['Field'];
                 if($i['chave']==$jj)continue;
-                $select.='        '.ident("$fk_name.$jj",70)." AS {$jj}_$fk_name,\n";
+                $select.='        '.ident("`$fk_name`.`$jj`",70)." AS `{$jj}_$fk_name`,\n";
               }
 
-              $join.="        LEFT JOIN $ct";
-              if($ct != $fk_name)$join.=" AS $fk_name";
-              $join.=" ON $table.$i[coluna] = $fk_name.$i[chave]\n";
+              $join.="        LEFT JOIN `$ct`";
+              if($ct != $fk_name)$join.=" AS `$fk_name`";
+              $join.=" ON `$table`.`$i[coluna]` = `$fk_name`.`$i[chave]`\n";
           }
 
           // foreach ($fks as $i) {
@@ -211,7 +211,7 @@ class $model extends CI_Model
         loop($database,$table,$join,$select);
         if($select==",\n")$select='';
         $select=substr($select, 0, -2)."\n";
-        $model_str.= "SELECT\n        $table.*{$select}        FROM $table\n$join        WHERE ({$table}.excluido != 1 OR {$table}.excluido is NULL)\n        \$id";
+        $model_str.= "SELECT\n        `$table`.*{$select}        FROM `$table`\n$join        WHERE (`{$table}`.`excluido` != 1 OR `{$table}`.`excluido` is NULL)\n        \$id";
 
         $model_str.="
       \");

@@ -19,10 +19,10 @@
         AND i.TABLE_NAME = '$table'
         GROUP BY coluna;");
 
-      $ret="INSERT INTO $_GET[table]\n(\n";
+      $ret="INSERT INTO `$_GET[table]`\n(\n";
       foreach ($result as $i) {
         $ii=$i['Field'];
-        $ret.="   $ii,\n";
+        $ret.="   `$ii`,\n";
       }
       $ret=substr($ret, 0, -2);
       $ret.="\n)\nVALUES\n(\n";
