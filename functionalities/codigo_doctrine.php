@@ -37,7 +37,7 @@ foreach ($fks as $i)
 }
 foreach ($fks as $i)
 {
-  $ret.="          CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$database`.`$table` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION,\n";
+  $ret.="          CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$database`.`$i[table]` (`$i[key]`) ON UPDATE NO ACTION ON DELETE NO ACTION,\n";
 }
 $ret=substr($ret, 0, -2);
 $ret.="
