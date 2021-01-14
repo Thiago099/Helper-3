@@ -36,7 +36,7 @@
       $cur=implode(array_slice($target,$start,$i-$start));
       if(strtolower($cur)==$_GET['table'])
       {
-        echo ident('Caminho',80).'Privilego'."\n\n";
+        //echo ident('Caminho',80).'Privilego'."\n\n";
         $i+=2;
         for (; $i < $target_lenght; $i++)
         {
@@ -66,7 +66,7 @@
             if($priv!='0')
             {
               // echo ident($db->query("SELECT titulo FROM privilegio WHERE id = $priv")[0]['titulo'],40);
-              echo $priv;
+              echo "(privilégio : $priv)";
 
             }
             echo "\n";

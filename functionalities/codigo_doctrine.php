@@ -6,15 +6,17 @@ $table=$_GET['table'];
 $db=new sql('information_schema');
 $fields = $db->query("SELECT COLUMN_NAME,IS_NULLABLE,COLUMN_TYPE,EXTRA FROM COLUMNS WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table'");
 $primary = $db->query("SELECT COLUMN_NAME FROM COLUMNS WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table' AND COLUMN_KEY='PRI'");
-$fks = $db->query("SELECT k.CONSTRAINT_NAME `constraint`,k.CONSTRAINT_SCHEMA `schema`, COLUMN_NAME `column`,k.REFERENCED_TABLE_NAME `table`, k.REFERENCED_COLUMN_NAME `key`,r.UPDATE_RULE,r.DELETE_RULE
+$fks = $db->query("SELECT k.CONSTRAINT_NAME `constraint`,k.CONSTRAINT_SCHEMA `schema`, COLUMN_NAME `column`,k.REFERENCED_TABLE_NAME `table`, k.REFERENCED_COLUMN_NAME `key`, r.UPDATE_RULE, r.DELETE_RULE
     FROM information_schema.TABLE_CONSTRAINTS i
     LEFT JOIN information_schema.KEY_COLUMN_USAGE k ON i.CONSTRAINT_NAME = k.CONSTRAINT_NAME
-    LEFT JOIN REFERENTIAL_CONSTRAINTS r ON i.CONSTRAINT_NAME = r.CONSTRAINT_NAME
+    LEFT JOIN information_schema.REFERENTIAL_CONSTRAINTS r ON i.CONSTRAINT_NAME = r.CONSTRAINT_NAME
     WHERE i.CONSTRAINT_TYPE = 'FOREIGN KEY'
     AND i.TABLE_SCHEMA = '$database'
     AND i.TABLE_NAME = '$table'
     GROUP BY K.COLUMN_NAME;");
-$more=$db->query("SELECT ENGINE,TABLE_COLLATION FROM TABLES  WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table'")[0];
+$more=$db->query("SELECT ENGINE,TABLE_COLLATION,TABLE_COMMENT FROM TABLES  WHERE TABLE_SCHEMA='$database' AND TABLE_NAME='$table'")[0];
+$comment='';
+if($more['TABLE_COMMENT']!='')$comment="\n      COMMENT=\'$more[TABLE_COMMENT]\'";
 $ret="
 public function up()
 {
@@ -44,7 +46,7 @@ $ret=substr($ret, 0, -2);
 $ret.="
       )
       COLLATE=\'$more[TABLE_COLLATION]\'
-      ENGINE=$more[ENGINE]
+      ENGINE=$more[ENGINE]$comment
     ');
 }
 public function down()
