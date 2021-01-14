@@ -42,6 +42,7 @@
             (
                 'get' => 0,
                 'salvar' => $_GET[privilegio],
+                'excluir' => $_GET[privilegio],
             ),");
               break;
             }
@@ -155,6 +156,36 @@ class $controler extends CI_Controller
           ->set_output(
             json_encode(\$response)
           );
+    }
+		public function excluir(\$id)
+    {
+        \$status_code = 200;
+        \$response = [
+            'status' => 'sucesso',
+            'lista'  => [],
+        ];
+
+        \$header = (object) \$this->input->request_headers();
+        \$user = (object) \$this->jwt->decode(isset(\$header->authorization) ? \$header->authorization : \$header->Authorization, CONSUMER_KEY);
+
+        \$dados_insert['$table'] = ['excluido'=> 1];
+
+         \$header = (object) \$this->input->request_headers();
+         \$user = (object) \$this->jwt->decode(isset(\$header->authorization) ? \$header->authorization : \$header->Authorization, CONSUMER_KEY);
+         \$dados_insert['id_usuario']=\$user->id_usuario;
+
+
+         \$dados_insert['$table']['updated_by'] = \$user->id_usuario;
+         \$dados_insert['$table']['updated_at'] = date('Y-m-d H:i:s', time());
+         \$result = \$this->\$table->atualizar(\$dados_insert, \$id);
+
+
+        return \$this->output
+            ->set_content_type('application/json')
+            ->set_status_header(\$status_code)
+            ->set_output(
+                json_encode(\$response)
+            );
     }
 }
 ?>";
