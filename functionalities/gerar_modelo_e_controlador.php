@@ -246,6 +246,7 @@ class $model extends CI_Model
 
         $model_str.="
       \");
+			if(\$id!=null) return \$query->first_row();
       return \$query->result_object();
     }
     public function salvar(\$dados)
