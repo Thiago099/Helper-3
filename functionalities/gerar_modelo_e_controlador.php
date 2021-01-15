@@ -323,16 +323,16 @@ class $model extends CI_Model
     fclose($f_model);
     ?>
     <label>Saida</label>
-    <textarea name="name" rows="10" cols="80" spellcheck="false"><?php
+    <textarea name="name" rows="40" cols="200" spellcheck="false"><?php
     echo "Rotas:\n";
     echo "public/$controler/get\n";
-    echo "public/$controler/salvar (privilegio:$_GET[privilegio])\n";
-		echo "public/$controler/excluir (privilegio:$_GET[privilegio])\n";
+    echo "public/$controler/salvar (privilégio:$_GET[privilegio])\n";
+		echo "public/$controler/excluir (privilégio:$_GET[privilegio])\n";
     echo "\nArquivos gerados:\n";
     echo "$p_model\n";
     echo "$p_controler\n";
     echo "\nArquivo editado:\n";
-    echo 'application/hooks/Verifica_token.php (Caminhos adicionados no inicio do vetor, necessário colocar em ordem alfabetica.)';
+    echo 'application/hooks/Verifica_token.php (Caminhos adicionados no inicio do vetor, necessário colocar em ordem alfabética.)';
     ?>
     </textarea>
 	<?php endif; ?>
