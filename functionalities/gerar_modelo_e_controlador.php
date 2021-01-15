@@ -177,7 +177,7 @@ class $controler extends CI_Controller
 
          \$dados_insert['$table']['updated_by'] = \$user->id_usuario;
          \$dados_insert['$table']['updated_at'] = date('Y-m-d H:i:s', time());
-         \$result = \$this->\$table->atualizar(\$dados_insert, \$id);
+         \$result = \$this->{$table}->atualizar(\$dados_insert, \$id);
 
 
         return \$this->output
@@ -327,6 +327,7 @@ class $model extends CI_Model
     echo "Rotas:\n";
     echo "public/$controler/get\n";
     echo "public/$controler/salvar (privilegio:$_GET[privilegio])\n";
+		echo "public/$controler/excluir (privilegio:$_GET[privilegio])\n";
     echo "\nArquivos gerados:\n";
     echo "$p_model\n";
     echo "$p_controler\n";
