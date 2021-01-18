@@ -18,40 +18,43 @@ $more=$db->query("SELECT ENGINE,TABLE_COLLATION,TABLE_COMMENT FROM TABLES  WHERE
 $comment='';
 if($more['TABLE_COMMENT']!='')$comment="\n      COMMENT=\'$more[TABLE_COMMENT]\'";
 $ret="
-public function up()
+class $table extends AbstractMigration
 {
-    \$this->addSql('
-      CREATE TABLE `$table`
-      (\n";
+  public function up(Schema \$schema)
+  {
+      \$this->addSql('
+        CREATE TABLE `$table`
+        (\n";
 foreach ($fields as $i)
 {
   $null=$i['IS_NULLABLE']==='YES'?'NULL':'NOT NULL';
   $extra=$i['EXTRA']!=''?" $i[EXTRA]":'';
-  $ret.="          `$i[COLUMN_NAME]` $i[COLUMN_TYPE] $null$extra,\n";
+  $ret.="           `$i[COLUMN_NAME]` $i[COLUMN_TYPE] $null$extra,\n";
 }
 
 foreach ($primary as $i)
 {
-  $ret.="          PRIMARY KEY (`$i[COLUMN_NAME]`) USING BTREE,\n";
+  $ret.="           PRIMARY KEY (`$i[COLUMN_NAME]`) USING BTREE,\n";
 }
 foreach ($fks as $i)
 {
-  $ret.="          INDEX `$i[constraint]` (`$i[column]`) USING BTREE,\n";
+  $ret.="           INDEX `$i[constraint]` (`$i[column]`) USING BTREE,\n";
 }
 foreach ($fks as $i)
 {
-  $ret.="          CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$i[schema]`.`$i[table]` (`$i[key]`) ON UPDATE $i[UPDATE_RULE] ON DELETE $i[DELETE_RULE],\n";
+  $ret.="           CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$i[schema]`.`$i[table]` (`$i[key]`) ON UPDATE $i[UPDATE_RULE] ON DELETE $i[DELETE_RULE],\n";
 }
 $ret=substr($ret, 0, -2);
 $ret.="
-      )
-      COLLATE=\'$more[TABLE_COLLATION]\'
-      ENGINE=$more[ENGINE]$comment
+        )
+        COLLATE=\'$more[TABLE_COLLATION]\'
+        ENGINE=$more[ENGINE]$comment
     ');
-}
-public function down()
-{
-  \$this->addSql('DROP TABLE `$_GET[table]`');
+  }
+  public function down(Schema \$schema)
+  {
+    \$this->addSql('DROP TABLE `$table`');
+  }
 }";
 echo $ret;
 ?></textarea>
