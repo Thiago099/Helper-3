@@ -18,7 +18,7 @@ $more=$db->query("SELECT ENGINE,TABLE_COLLATION,TABLE_COMMENT FROM TABLES  WHERE
 $comment='';
 if($more['TABLE_COMMENT']!='')$comment="\n      COMMENT=\'$more[TABLE_COMMENT]\'";
 $ret="
-class $table extends AbstractMigration
+class {$table}_".date('Y-m-d-H-i-s', time())." extends AbstractMigration
 {
   public function up(Schema \$schema)
   {

@@ -101,7 +101,7 @@ class $controler extends CI_Controller
         ];
 
         \$dados_insert = [];
-        \$dados = json_decode(\$this->input->post('data'));
+        \$dados = json_decode(\$this->input->raw_input_stream);
 
   ";
         $db=new sql($_GET['database']);
