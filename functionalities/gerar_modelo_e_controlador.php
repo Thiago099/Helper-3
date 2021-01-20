@@ -63,13 +63,7 @@ class $controler extends CI_Controller
 {
     public function __construct()
     {
-      // Sobrecarga no costrutor
       parent::__construct();
-
-      // usado somente pra debugar
-      //\$this->load->helper('chrome_helper');
-
-      //Carrega os models necessários
       \$this->load->model('$model','$table');
     }
     public function get(\$id=null)
