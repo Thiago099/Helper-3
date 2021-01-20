@@ -66,7 +66,7 @@ class $controler extends CI_Controller
       parent::__construct();
       \$this->load->model('$model','$table');
     }
-    public function get(\$id=null)
+    public function listar(\$id=null)
     {
       \$status_code = 200;
       \$response = [
@@ -74,7 +74,7 @@ class $controler extends CI_Controller
         'lista'  => [],
       ];
 
-      if(\$query = \$this->{$table}->get(\$id))
+      if(\$query = \$this->{$table}->listar(\$id))
       {
         \$response['lista']=\$query;
       }
@@ -134,7 +134,7 @@ class $controler extends CI_Controller
 
         if (\$result)
         {
-          \$response['lista']  = \$this->{$table}->get(\$result);
+          \$response['lista']  = \$this->{$table}->listar(\$result);
         }
         else
         {
@@ -192,7 +192,7 @@ class $model extends CI_Model
     {
       parent::__construct();
     }
-    public function get(\$id = null)
+    public function listar(\$id = null)
     {
       if(\$id != null)\$id = \"AND `$table`.`id` = \$id\";
       \$query = \$this->db->query(\"";
@@ -320,7 +320,7 @@ class $model extends CI_Model
     <label>Saida</label>
     <textarea name="name" rows="40" cols="200" spellcheck="false"><?php
     echo "Rotas:\n";
-    echo "public/$controler/get\n";
+    echo "public/$controler/listar\n";
     echo "public/$controler/salvar (privilégio:$_GET[privilegio])\n";
 		echo "public/$controler/excluir (privilégio:$_GET[privilegio])\n";
     echo "\nArquivos gerados:\n";

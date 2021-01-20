@@ -33,7 +33,7 @@
       'Código select'                 => 'codigo_select.php',
       'Código JSON'                   => 'codigo_json.php',
       'Caminhos do controlador'       => 'caminhos_do_controlador.php',
-      'Codigo doctrine'               => 'codigo_doctrine.php',
+      'Codigo migration'               => 'codigo_migration.php',
     ];
     if(isset($_GET['action']))
     {
