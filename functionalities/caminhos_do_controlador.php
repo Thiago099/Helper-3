@@ -19,7 +19,7 @@
 
   for (; $i < $target_lenght; $i++)
   {
-    if(match($i,$target,$source))
+    if(match_after($i,$target,$source))
     {
       break;
     }
@@ -52,7 +52,7 @@
             $i++;
             for (; $i < $target_lenght; $i++)
             {
-              match($i,$target,$arrow);
+              match_after($i,$target,$arrow);
               break;
             }
             $i+=3;
@@ -72,7 +72,7 @@
             echo "\n";
           }
           else
-          if(match($i,$target,$end))
+          if(match_after($i,$target,$end))
           {
             break;
           }
@@ -82,7 +82,7 @@
       else
       for (; $i < $target_lenght; $i++)
       {
-        if(match($i,$target,$end))
+        if(match_after($i,$target,$end))
         break;
       }
     }

@@ -34,7 +34,7 @@
           $target_lenght=count($target);
           for ($i=0; $i < $target_lenght; $i++)
           {
-            if(match($i,$target,$source))
+            if(match_after($i,$target,$source))
             {
 
               array_splice( $target, $i, 0, "
