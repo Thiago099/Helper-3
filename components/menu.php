@@ -6,7 +6,7 @@ if(isset($_GET['table'])&& exists($_GET['database'],$_GET['table'])):
 </div>
   <div class="button_container">
     <div class="button">
-    <input type="submit" value="Selecionar">
+    <!-- <input type="submit" value="Selecionar"> -->
     <input type="submit" name="action" value="Gerar modelo e controlador">
     <input type="submit" name="action" value="Adicionar campos de controle">
     <input type="submit" name="action" value="Código insert">
