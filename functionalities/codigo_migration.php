@@ -46,7 +46,7 @@ foreach ($fks as $i)
 }
 foreach ($fks as $i)
 {
-  $ret.="           CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$i[schema]`.`$i[table]` (`$i[key]`) ON UPDATE $i[UPDATE_RULE] ON DELETE $i[DELETE_RULE],\n";
+  $ret.="           CONSTRAINT `$i[constraint]` FOREIGN KEY (`$i[column]`) REFERENCES `$i[table]` (`$i[key]`) ON UPDATE $i[UPDATE_RULE] ON DELETE $i[DELETE_RULE],\n";
 }
 $ret=substr($ret, 0, -2);
 $ret.="
