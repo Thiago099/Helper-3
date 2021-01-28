@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET['table'])&& exists($_GET['database'],$_GET['table'])):
+if(isset($_GET['database'])):
 ?>
 
 <label>Opções</label>
