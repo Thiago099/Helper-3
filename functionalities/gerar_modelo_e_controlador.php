@@ -40,7 +40,7 @@
               array_splice( $target, $i, 0, "
             '$controler' => array
             (
-                'get' => 0,
+                'listar' => 0,
                 'salvar' => $_GET[privilegio],
                 'excluir' => $_GET[privilegio],
             ),");
