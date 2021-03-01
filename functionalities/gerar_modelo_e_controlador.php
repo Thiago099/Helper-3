@@ -194,7 +194,12 @@ class $model extends CI_Model
     }
     public function listar(\$id = null)
     {
-      if(\$id != null)\$id = \"AND `$table`.`id` = \$id\";
+      \$parameters=[];
+      if(\$id != null)
+      {
+        \$parameters[]=\$id;
+        \$id = \"AND `$table`.`id` = ?\";
+      }
       \$query = \$this->db->query(\"";
         function loop($database,$table,&$join,&$select)
         {
@@ -239,7 +244,7 @@ class $model extends CI_Model
         $model_str.= "SELECT\n        `$table`.*{$select}        FROM `$table`\n$join        WHERE (`{$table}`.`excluido` != 1 OR `{$table}`.`excluido` is NULL)\n        \$id";
 
         $model_str.="
-      \");
+      \",\$parameters);
 			if(\$id!=null) return \$query->first_row();
       return \$query->result_object();
     }
