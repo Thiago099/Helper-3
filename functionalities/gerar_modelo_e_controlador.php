@@ -53,13 +53,14 @@
 
         $controler_str=
 "<?php
+include('Controller_Base.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 header(\"Access-Control-Allow-Origin: *\");
 header(\"Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS\");
 header(\"Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization\");
 
-class $controler extends CI_Controller
+class $controler extends Controller_Base
 {
     public function __construct()
     {
@@ -109,25 +110,23 @@ class $controler extends CI_Controller
            else if($ii=='created_at') continue;
            else if($ii=='updated_by') continue;
            else if($ii=='updated_at') continue;
-          $controler_str.= '           '.ident("'$ii' ",70)."=> \$dados->$ii,\n";
+          $controler_str.= '           '.ident("'$ii' ",70)."=> \$this->valida_campo(\$dados->$ii),\n";
         }
         $controler_str.= '        ];';
         $controler_str.=
          "
-
-        \$header = (object) \$this->input->request_headers();
-        \$user = (object) \$this->jwt->decode(isset(\$header->authorization) ? \$header->authorization : \$header->Authorization, CONSUMER_KEY);
-        \$dados_insert['id_usuario']=\$user->id_usuario;
+        \$user=\$this->get_user_id();
+        \$dados_insert['id_usuario'] = \$user;
 
         if ((int)\$dados->id == 0)
         {
-          \$dados_insert['$table']['created_by'] = \$user->id_usuario;
+          \$dados_insert['$table']['created_by'] = \$user;
           \$dados_insert['$table']['created_at'] = date('Y-m-d H:i:s', time());
           \$result = \$this->{$table}->salvar(\$dados_insert);
         }
         else
         {
-          \$dados_insert['$table']['updated_by'] = \$user->id_usuario;
+          \$dados_insert['$table']['updated_by'] = \$user;
           \$dados_insert['$table']['updated_at'] = date('Y-m-d H:i:s', time());
           \$result = \$this->{$table}->atualizar(\$dados_insert, \$dados->id);
         }
