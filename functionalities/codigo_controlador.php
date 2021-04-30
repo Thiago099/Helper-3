@@ -11,7 +11,7 @@
      else if($ii=='created_at') continue;
      else if($ii=='updated_by') continue;
      else if($ii=='updated_at') continue;
-    echo ident("   '$ii' ",70)."=> \$dados->$ii,\n";
+    echo ident("   '$ii' ",70)."=> \$this->valida_campo(\$dados->$ii),\n";
   }
   echo '];';
   echo "
