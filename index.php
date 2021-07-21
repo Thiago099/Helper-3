@@ -32,8 +32,9 @@
       'Código controlador'            => 'codigo_controlador.php',
       'Código select'                 => 'codigo_select.php',
       'Código JSON'                   => 'codigo_json.php',
+      'Código JSON camel'             => 'codigo_json_camel.php',
       'Caminhos do controlador'       => 'caminhos_do_controlador.php',
-      'Codigo migration'               => 'codigo_migration.php',
+      'Codigo migration'              => 'codigo_migration.php',
     ];
     if(isset($_GET['action']))
     {

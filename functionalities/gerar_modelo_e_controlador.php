@@ -115,7 +115,9 @@ class $controler extends Controller_Base
         $controler_str.= '        ];';
         $controler_str.=
          "
-        \$user=\$this->get_user_id();
+
+        \$user = \$this->get_user_id();
+
         \$dados_insert['id_usuario'] = \$user;
 
         if ((int)\$dados->id == 0)
@@ -158,17 +160,12 @@ class $controler extends Controller_Base
             'lista'  => [],
         ];
 
-        \$header = (object) \$this->input->request_headers();
-        \$user = (object) \$this->jwt->decode(isset(\$header->authorization) ? \$header->authorization : \$header->Authorization, CONSUMER_KEY);
-
         \$dados_insert['$table'] = ['excluido'=> 1];
 
-         \$header = (object) \$this->input->request_headers();
-         \$user = (object) \$this->jwt->decode(isset(\$header->authorization) ? \$header->authorization : \$header->Authorization, CONSUMER_KEY);
-         \$dados_insert['id_usuario']=\$user->id_usuario;
+         \$user = \$this->get_user_id();
+         \$dados_insert['id_usuario'] = \$user;
 
-
-         \$dados_insert['$table']['updated_by'] = \$user->id_usuario;
+         \$dados_insert['$table']['updated_by'] = \$user;
          \$dados_insert['$table']['updated_at'] = date('Y-m-d H:i:s', time());
          \$result = \$this->{$table}->atualizar(\$dados_insert, \$id);
 

@@ -59,4 +59,10 @@
 		$ret=substr($ret, 0, -1);
 		return $ret;
 	}
+	function spaces_to_camel($string) 
+	{
+
+		$str = str_replace('_', '', ucwords($string, '_'));
+		return $str;
+	}
 ?>
