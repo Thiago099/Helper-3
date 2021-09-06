@@ -35,6 +35,7 @@
       'Código JSON camel'             => 'codigo_json_camel.php',
       'Caminhos do controlador'       => 'caminhos_do_controlador.php',
       'Codigo migration'              => 'codigo_migration.php',
+      'Arrumar foreign keys'          => 'arrumar_foreign_keys.php',
     ];
     if(isset($_GET['action']))
     {

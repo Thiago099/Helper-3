@@ -17,6 +17,7 @@ if(isset($_GET['database'])):
     <input type="submit" name="action" value="Código JSON camel">
     <input type="submit" name="action" value="Caminhos do controlador">
     <input type="submit" name="action" value="Codigo migration">
+    <input type="submit" name="action" value="Arrumar foreign keys">
     </div>
   </div>
 <div class="container">

@@ -18,7 +18,7 @@ class sql
   {
     $ret=[];
     $result = $this->conn->query($sql);
-    if ($result->num_rows > 0)
+    if ($result && $result->num_rows > 0)
         while($row = $result->fetch_assoc())
             array_push($ret,$row);
     return $ret;
@@ -30,7 +30,7 @@ class sql
   }
   public function close()
   {
-    $conn->close();
+    $this->conn->close();
   }
 }
 ?>

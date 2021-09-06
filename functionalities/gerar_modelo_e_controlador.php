@@ -22,13 +22,13 @@
           </textarea>
           <?php
           else:
-          $path="$program/application/hooks/Verifica_token.php";
+          $path = "$program/application/hooks/Verifica_token.php";
           $myfile = fopen($path, "r") or die("Unable to open file!");
           $target = str_split(fread($myfile,filesize($path)));
           fclose($myfile);
 
 
-          $source=str_split('$mapUrl = array(');
+          $source = str_split('$mapUrl = array(');
 
           $source_lenght=count($source);
           $target_lenght=count($target);
@@ -67,7 +67,7 @@ class $controler extends Controller_Base
       parent::__construct();
       \$this->load->model('$model','$table');
     }
-    public function listar(\$id=null)
+    public function listar(\$id = null)
     {
       \$status_code = 200;
       \$response = [
@@ -77,7 +77,7 @@ class $controler extends Controller_Base
 
       if(\$query = \$this->{$table}->listar(\$id))
       {
-        \$response['lista']=\$query;
+        \$response['lista'] = \$query;
       }
 
       return \$this->output
@@ -87,6 +87,7 @@ class $controler extends Controller_Base
           json_encode(\$response)
         );
     }
+
     public function salvar()
     {
         \$status_code = 200;
@@ -152,6 +153,7 @@ class $controler extends Controller_Base
             json_encode(\$response)
           );
     }
+
 		public function excluir(\$id)
     {
         \$status_code = 200;
@@ -193,7 +195,7 @@ class $model extends CI_Model
       \$parameters=[];
       if(\$id != null)
       {
-        \$parameters[]=\$id;
+        \$parameters[] = \$id;
         \$id = \"AND `$table`.`id` = ?\";
       }
       \$query = \$this->db->query(\"";
@@ -244,6 +246,7 @@ class $model extends CI_Model
 			if(\$id!=null) return \$query->first_row();
       return \$query->result_object();
     }
+
     public function salvar(\$dados)
     {
       \$this->db->trans_begin();
@@ -277,6 +280,7 @@ class $model extends CI_Model
         }
       }
     }
+    
     public function atualizar(\$dados, \$id)
     {
       if (\$dados != null)
