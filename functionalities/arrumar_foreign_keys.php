@@ -31,9 +31,16 @@
   foreach ($bad_fks as $i) 
   {
     $reference = str_replace('id_','',$i['COLUMN_NAME']);
-    $violation = $siga->query("SELECT DISTINCT $i[COLUMN_NAME] AS v FROM $i[TABLE_NAME] WHERE $i[COLUMN_NAME] NOT IN (SELECT id FROM $reference)");
+    try
+    {
+      $violation = $siga->query("SELECT DISTINCT $i[COLUMN_NAME] AS v FROM $i[TABLE_NAME] WHERE $i[COLUMN_NAME] NOT IN (SELECT id FROM $reference)");
+    }
+    catch (Exception $e)
+    {
+      $violation = "table not found";
+    }
     if(count($info->query("SELECT * FROM tables
-    WHERE table_schema = 'mg-siga'
+    WHERE table_schema = $_GET['database']
     AND TABLE_NAME = '$reference'")) == 0) 
     {
       echo "ALTER TABLE `$i[TABLE_NAME]` ADD INDEX `$i[TABLE_NAME]_$i[COLUMN_NAME]` (`$i[COLUMN_NAME]`);\n";
@@ -46,6 +53,10 @@
       foreach($violation as $j)
         echo "-- $j[v]\n";
       echo '-- ';
+    }
+    else
+    {
+      echo '--';
     }
     echo "ALTER TABLE `$i[TABLE_NAME]` ADD CONSTRAINT `FK_$i[TABLE_NAME]_$i[COLUMN_NAME]` FOREIGN KEY (`$i[COLUMN_NAME]`) REFERENCES `$reference` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;\n\n";
   }
