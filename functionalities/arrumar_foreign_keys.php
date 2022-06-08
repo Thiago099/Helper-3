@@ -40,7 +40,7 @@
       $violation = "table not found";
     }
     if(count($info->query("SELECT * FROM tables
-    WHERE table_schema = $_GET['database']
+    WHERE table_schema = $_GET[database]
     AND TABLE_NAME = '$reference'")) == 0) 
     {
       echo "ALTER TABLE `$i[TABLE_NAME]` ADD INDEX `$i[TABLE_NAME]_$i[COLUMN_NAME]` (`$i[COLUMN_NAME]`);\n";
