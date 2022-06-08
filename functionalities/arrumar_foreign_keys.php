@@ -54,9 +54,9 @@
         echo "-- $j[v]\n";
       echo '-- ';
     }
-    else
+    else if($violation == "table not found")
     {
-      echo '--';
+      echo '-- ';
     }
     echo "ALTER TABLE `$i[TABLE_NAME]` ADD CONSTRAINT `FK_$i[TABLE_NAME]_$i[COLUMN_NAME]` FOREIGN KEY (`$i[COLUMN_NAME]`) REFERENCES `$reference` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION;\n\n";
   }
